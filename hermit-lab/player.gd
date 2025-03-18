@@ -3,12 +3,11 @@ extends CharacterBody2D
 @export var speed: int = 200
 var inventory: Array = []
 
-# We'll initialize these in _ready(), since your scene doesn't yet have these nodes.
 var inventory_ui: Node = null
 var eat_bar: ProgressBar = null
 
 func _ready() -> void:
-	# Attempt to get the inventory UI and eat bar from the CanvasLayer, if they exist.
+	# Try to find UI nodes. These lines will work when you add them under CanvasLayer.
 	if has_node("../CanvasLayer/Panel/VBoxContainer"):
 		inventory_ui = get_node("../CanvasLayer/Panel/VBoxContainer")
 	if has_node("../CanvasLayer/EatBar"):
@@ -37,28 +36,29 @@ func _physics_process(delta: float) -> void:
 
 	# When pressing F (pickup), simulate picking up a food item.
 	if Input.is_action_just_pressed("pickup"):
-		# For now, we assume the item picked up is food.
 		add_item("Morsel of Food", true)
 
 # Adds an item to the inventory.
-# The second parameter distinguishes food items (true) from other loot.
+# If is_food is true, it will also restore 25% of the Eat bar.
 func add_item(item_name: String, is_food: bool = false) -> void:
 	inventory.append(item_name)
 	print("Picked up: " + item_name)
 	update_inventory_ui()
 	
-	# If it's food and we have an Eat bar, restore 25% (clamped to max_value).
 	if is_food and eat_bar:
 		eat_bar.value = min(eat_bar.max_value, eat_bar.value + 25)
 
-# Updates the inventory UI to display the current inventory.
+# Updates the inventory UI with current items.
 func update_inventory_ui() -> void:
 	if inventory_ui:
-		# Clear any existing UI items.
 		for child in inventory_ui.get_children():
 			child.queue_free()
-		# Add a new Label for each inventory item.
 		for item in inventory:
 			var label = Label.new()
 			label.text = item
 			inventory_ui.add_child(label)
+
+# Called when the player dies.
+func die() -> void:
+	print("You died!")
+	get_tree().reload_current_scene()
