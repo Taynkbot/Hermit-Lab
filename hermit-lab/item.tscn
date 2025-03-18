@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1f6boe3wf2x7"]
+
+[ext_resource type="Script" uid="uid://ba4o8i7ndlcsl" path="res://item.gd" id="1_tnite"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpy52"]
+size = Vector2(25, 25)
+
+[node name="item" type="Area2D"]
+script = ExtResource("1_tnite")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 25.0
+offset_bottom = 25.0
+color = Color(0.694118, 0.211765, 0.333333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12.5, 12.5)
+shape = SubResource("RectangleShape2D_vpy52")
+
+[node name="Prompt" type="Label" parent="."]
+visible = false
+offset_left = -47.0
+offset_top = -47.0
+offset_right = 74.0
+offset_bottom = -24.0
+text = "Press F to Stash"
+horizontal_alignment = 1

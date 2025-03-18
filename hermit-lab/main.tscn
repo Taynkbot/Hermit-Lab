@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://3gga3lyf6t2r"]
+
+[ext_resource type="PackedScene" uid="uid://6jjkcgwk0xju" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://jix40n1ryjqq" path="res://obstactle.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c1f6boe3wf2x7" path="res://item.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://caqvvevod3eua" path="res://UI_EatBar.tscn" id="4_1bvp3"]
+
+[sub_resource type="TileSet" id="TileSet_0xm2m"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(559, 310)
+speed = 200
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_1bvp3")]
+
+[node name="TileMap" type="TileMap" parent="."]
+rotation = -0.760964
+tile_set = SubResource("TileSet_0xm2m")
+rendering_quadrant_size = 128
+collision_animatable = true
+format = 2
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(716.05, 390.512)
+
+[node name="StaticBody2D" parent="StaticBody2D" instance=ExtResource("2_0xm2m")]
+position = Vector2(4.95038, -162.512)
+
+[node name="item" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(596, 78)
+
+[node name="item2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(885, 360)
+
+[node name="item3" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(766, 236)
+
+[node name="item4" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(717, 327)

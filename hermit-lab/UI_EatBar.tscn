@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://caqvvevod3eua"]
+
+[ext_resource type="Script" uid="uid://ctkb3mndlkh2c" path="res://UI_EatBar.gd" id="1_18hca"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="EatBar" type="ProgressBar" parent="."]
+self_modulate = Color(1, 0.239216, 0.392157, 0.658824)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -2.0
+offset_right = 573.0
+offset_bottom = 27.0
+grow_horizontal = 2
+value = 100.0
+script = ExtResource("1_18hca")
