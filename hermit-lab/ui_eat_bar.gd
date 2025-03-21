@@ -1,4 +1,5 @@
 extends ProgressBar
+class_name Eat_Bar
 
 # BASE_RATE is set so that a full (100) bar drains over 1800 seconds (30 minutes)
 const BASE_RATE: float = 100.0 / 18.0

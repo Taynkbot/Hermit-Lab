@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv6mmxiridq6w"]
+
+[ext_resource type="Script" uid="uid://bdnbcqmbv4jrb" path="res://ui_eaten_bar.gd" id="1_lullf"]
+
+[node name="BeEatenBar" type="ProgressBar"]
+self_modulate = Color(0.692892, 0.686027, 0, 0.772549)
+layout_direction = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = -26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+value = 50.0
+fill_mode = 1
+script = ExtResource("1_lullf")

@@ -1,20 +1,25 @@
 [gd_scene load_steps=4 format=3 uid="uid://6jjkcgwk0xju"]
 
 [ext_resource type="Script" uid="uid://rrevbusjvjjn" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://j3etjb2odfrn" path="res://icon.svg" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://cny2kuewxl678" path="res://Resources/hermit-crab-01-small.png" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
-size = Vector2(128, 128)
+size = Vector2(128, 107)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 2
 script = ExtResource("1_onrkg")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("2_i3pqv")
+offset_left = -76.0
+offset_top = -78.0
+offset_right = 78.0
+offset_bottom = 76.0
+rotation = 1.5708
+pivot_offset = Vector2(72, 72)
+texture = ExtResource("2_onrkg")
+expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 3)
 shape = SubResource("RectangleShape2D_hqtel")

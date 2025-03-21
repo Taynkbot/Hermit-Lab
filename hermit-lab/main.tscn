@@ -1,26 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://3gga3lyf6t2r"]
+[gd_scene load_steps=13 format=3 uid="uid://3gga3lyf6t2r"]
 
 [ext_resource type="PackedScene" uid="uid://6jjkcgwk0xju" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://jix40n1ryjqq" path="res://obstactle.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://c1f6boe3wf2x7" path="res://item.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://c1f6boe3wf2x7" path="res://food_egg.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://caqvvevod3eua" path="res://UI_EatBar.tscn" id="4_1bvp3"]
-
-[sub_resource type="TileSet" id="TileSet_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bv6mmxiridq6w" path="res://UI_EatenBar.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cb02g52y1ykws" path="res://food_spawner.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://baqgur1c4o1a6" path="res://obstacle_spawner.gd" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://o1u3dwt1rjxn" path="res://Resources/nest-01.png" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://cilcp4dr4lngv" path="res://Treasure.tscn" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://biowvbhqvvx37" path="res://Resources/nest-02.png" id="9_dg77c"]
+[ext_resource type="Texture2D" uid="uid://cyst1tkaovg5d" path="res://Resources/sandtile01.png" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://coer7xun1kxfr" path="res://Resources/nest-03.png" id="10_ycdy4"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(559, 310)
-speed = 200
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_ig7tw")]
+position = Vector2(555, 311)
+be_eaten_bar_path = NodePath("../UI_Layer/BeEatenBar")
+eat_bar_path = NodePath("../UI_Layer/Eat_Bar")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("4_1bvp3")]
-
-[node name="TileMap" type="TileMap" parent="."]
-rotation = -0.760964
-tile_set = SubResource("TileSet_0xm2m")
-rendering_quadrant_size = 128
-collision_animatable = true
-format = 2
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 7)
+position_smoothing_enabled = true
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(716.05, 390.512)
@@ -39,3 +41,51 @@ position = Vector2(766, 236)
 
 [node name="item4" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(717, 327)
+
+[node name="UI_Layer" type="CanvasLayer" parent="."]
+
+[node name="Eat_Bar" parent="UI_Layer" instance=ExtResource("4_1bvp3")]
+
+[node name="DeathLabel" type="Label" parent="UI_Layer"]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 465.0
+offset_top = 206.0
+offset_right = 665.0
+offset_bottom = 406.0
+text = "You Dead Bitch!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="BeEatenBar" parent="UI_Layer" instance=ExtResource("5_lquwl")]
+value = 0.0
+
+[node name="FoodSpawner" parent="." groups=["food_container"] instance=ExtResource("6_7mycd")]
+food_scene = ExtResource("3_h2yge")
+treasure_scene = ExtResource("8_5vw27")
+spawn_area = Vector2(5000, 5000)
+max_food = 100
+spawn_time = 0.1
+clump_size = 4
+nest_textures = Array[Texture]([ExtResource("8_4c57u"), ExtResource("9_dg77c"), ExtResource("10_ycdy4")])
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(-8, -3)
+script = ExtResource("7_272bh")
+obstacle_scene = ExtResource("2_0xm2m")
+spawn_area = Vector2(3000, 3000)
+grid_size = 50.0
+num_obstacles = 200
+
+[node name="Treasure" parent="." instance=ExtResource("8_5vw27")]
+position = Vector2(435, 149)
+
+[node name="SandBackground" type="TextureRect" parent="."]
+z_index = -1
+offset_left = -1498.0
+offset_top = -1137.0
+offset_right = 3519.0
+offset_bottom = 2309.0
+texture = ExtResource("9_kek77")
+expand_mode = 1
+stretch_mode = 1
