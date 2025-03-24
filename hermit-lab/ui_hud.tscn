@@ -1,22 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://5563m3k7seik"]
+[gd_scene load_steps=4 format=3 uid="uid://5563m3k7seik"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_jw1vm"]
+[ext_resource type="Script" uid="uid://dfjme6376uhqq" path="res://ui_hud.gd" id="1_jkgtr"]
+[ext_resource type="PackedScene" uid="uid://caqvvevod3eua" path="res://UI_EatBar.tscn" id="1_svere"]
+[ext_resource type="PackedScene" uid="uid://bv6mmxiridq6w" path="res://UI_EatenBar.tscn" id="2_jkgtr"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="UI_Layer" type="CanvasLayer"]
+script = ExtResource("1_jkgtr")
+eat_bar_path = NodePath("EatBar")
+overfill_bar_path = NodePath("EatBar/OverfillBar")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="EatBar" parent="." instance=ExtResource("1_svere")]
+eat_bar_path = NodePath(".")
+overfill_bar_path = NodePath("OverfillBar")
 
-[node name="SmellArrow" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0)
+[node name="OverfillBar" type="ProgressBar" parent="EatBar"]
+modulate = Color(0.635294, 0.490196, 1, 0.607843)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("CanvasTexture_jw1vm")
+offset_right = 575.0
+offset_bottom = 27.0
+value = 8.38
+show_percentage = false
+
+[node name="BeEatenBar" parent="." instance=ExtResource("2_jkgtr")]
+offset_left = -573.0
+offset_right = -23.0
+
+[node name="DeathLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 465.0
+offset_top = 206.0
+offset_right = 665.0
+offset_bottom = 406.0
+text = "You Dead Bitch!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

@@ -1,34 +1,59 @@
 extends ProgressBar
 class_name Eat_Bar
 
-# BASE_RATE is set so that a full (100) bar drains over 1800 seconds (30 minutes)
-const BASE_RATE: float = 100.0 / 18.0
+@export var eat_bar_path: NodePath  # Assign this to the EatBar node in the Inspector
+@export var overfill_bar_path: NodePath  # Assign this to the OverfillBar node in the Inspector
 
-var player: Node = null
+# BASE_RATE is set so that a full (100) bar drains over 18
+const BASE_RATE: float = 100.0 / 18.0
+const OVERFILL_DECAY_RATE: float = 50.0 / 18.0  # Overfill bar drains faster than the eat bar
+
+var eat_bar: ProgressBar = null
+var overfill_bar: ProgressBar = null
+var universal_food_value: float = 125  # Universal food value representing total food
 
 func _ready() -> void:
-	# Look for the player at the specified path.
-	if has_node("/root/Node2D/Player"):
-		player = get_node("/root/Node2D/Player")
+	# Assign eat_bar and overfill_bar using the exported NodePaths
+	if eat_bar_path:
+		eat_bar = get_node(eat_bar_path)
+		if not eat_bar:
+			print("Error: eat_bar node not found!")
 	else:
-		print("Player node not found!")
+		print("Error: eat_bar_path is not assigned!")
 
-func _process(delta: float) -> void:
-	var consumption_rate = BASE_RATE
-	
-	if player:
-		# Double the consumption rate if the player is moving.
-		if player.velocity.length() > 0:
-			consumption_rate *= 2
-			# Quadruple it if the player is sprinting (make sure "sprint" is set in Input Map)
-			if Input.is_action_pressed("sprint"):
-				consumption_rate *= 2
+	if overfill_bar_path:
+		overfill_bar = get_node(overfill_bar_path)
+		if not overfill_bar:
+			print("Error: overfill_bar node not found!")
+	else:
+		print("Error: overfill_bar_path is not assigned!")
 
-	# Decrease the bar's value (clamped at 0).
-	value = max(0, value - consumption_rate * delta)
-	
-	# Check if food has run out.
-	if value <= 0:
-		# Call the player's die() method if it exists.
-		if player and player.has_method("die"):
-			player.die()
+func update_bars() -> void:
+	# Update the EatBar based on universal_food_value (0-100)
+	if eat_bar:
+		eat_bar.value = clamp(universal_food_value, 0, 100)
+
+	# Update the OverfillBar based on universal_food_value (100-200)
+	if overfill_bar:
+		overfill_bar.value = clamp(universal_food_value - 100, 0, 100)
+
+func add_food(amount: float) -> void:
+	# Add food to the universal food value
+	universal_food_value += amount
+	universal_food_value = min(universal_food_value, 200)  # Cap the universal food value at 200
+
+	# Debugging: Print once when food is added
+	print("Food added. Universal food value: ", universal_food_value)
+
+	# Update the bars
+	update_bars()
+
+func consume(delta: float, consumption_rate: float) -> void:
+	# Calculate the amount to consume
+	var consumption = consumption_rate * delta
+
+	# Reduce the universal food value
+	universal_food_value = max(0, universal_food_value - consumption)
+
+	# Update the bars
+	update_bars()
