@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://5563m3k7seik" path="res://ui_hud.tscn" id="11_efxa6"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(3, 3)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_ig7tw")]
 position = Vector2(555, 311)
@@ -44,9 +45,9 @@ position = Vector2(717, 327)
 food_scene = ExtResource("3_h2yge")
 treasure_scene = ExtResource("8_5vw27")
 spawn_area = Vector2(5000, 5000)
-max_food = 100
+max_food = 1000
 spawn_time = 0.1
-clump_size = 4
+clump_size = 300
 nest_textures = Array[Texture]([ExtResource("8_4c57u"), ExtResource("9_dg77c"), ExtResource("10_ycdy4")])
 
 [node name="ObstacleSpawner" type="Node2D" parent="."]

@@ -35,12 +35,23 @@ func _ready() -> void:
 	update_inventory_ui()
 
 func get_movement_speed() -> float:
-	# Calculate the slow factor based on the overfill bar value.
-	var slow_factor = 1.0
-	if hud and hud.has_node("EatBar/OverfillBar"):
-		var overfill_bar = hud.get_node("EatBar/OverfillBar")
-		slow_factor = max(1.0 - (overfill_bar.value * overfill_penalty), 0.2)  # Min speed 20%
-	return base_speed * slow_factor
+	# Check if the HUD and EatBar exist
+	if hud and hud.has_node("EatBar"):
+		var eat_bar = hud.get_node("EatBar")
+		var food_value = eat_bar.universal_food_value
+
+		# Double speed if food is 15 or less
+		if food_value <= 15:
+			return base_speed * 2.0
+
+		# Gradually decrease speed from 100 to 1000 food
+		if food_value >= 100:
+			# Map food_value (100-1000) to speed percentage (100%-1%)
+			var speed_percentage = lerp(1.0, 0.01, (food_value - 100) / 900.0)
+			return base_speed * speed_percentage
+
+	# Default speed if no conditions are met
+	return base_speed
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -82,6 +93,12 @@ func _physics_process(delta: float) -> void:
 		if is_sprinting:
 			increase_amount *= be_eaten_bar.sprint_multiplier
 		be_eaten_bar.increase(increase_amount)
+
+	# Check if BeEatenBar is full
+	if hud and hud.has_node("BeEatenBar"):
+		var be_eaten_bar = hud.get_node("BeEatenBar")
+		if be_eaten_bar.value >= be_eaten_bar.max_value:
+			_on_be_eaten()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("hide"):

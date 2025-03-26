@@ -5,7 +5,7 @@ extends Node2D
 @export var spawn_area: Vector2 = Vector2(1000, 1000)
 @export var max_food: int = 10
 @export var spawn_time: float = 5.0
-@export var clump_size: int = 3
+@export var clump_size: int = 0
 @export var treasure_spawn_chance: float = 0.2  # 20% chance per nest
 @export var nest_textures: Array[Texture]  # Assign different nest textures in the Inspector
 
