@@ -16,6 +16,7 @@ var overfill_penalty = 0.05  # Speed penalty per overfill level
 
 const FOOD_RESTORE_AMOUNT: int = 25
 
+
 func _ready() -> void:
 	# Find UI nodes (adjust paths to match your scene hierarchy)
 	if has_node("../UI_Layer/Panel/VBoxContainer"):
@@ -33,6 +34,46 @@ func _ready() -> void:
 		print("Warning: hud_path is not set!")
 
 	update_inventory_ui()
+
+
+func get_save_data() -> Dictionary:
+	var data := {
+		"position": {
+			"x": global_position.x,
+			"y": global_position.y
+		},
+		"inventory": inventory
+	}
+
+	if hud:
+		if hud.has_node("EatBar"):
+			data["food_value"] = hud.get_node("EatBar").universal_food_value
+		if hud.has_node("BeEatenBar"):
+			data["threat_level"] = hud.get_node("BeEatenBar").value
+
+	return data
+
+
+func load_save_data(data: Dictionary) -> void:
+	if data.has("position"):
+		var p = data["position"]
+		global_position = Vector2(p["x"], p["y"])
+
+	if data.has("inventory"):
+		inventory = data["inventory"]
+		update_inventory_ui()
+
+	if hud:
+		if data.has("food_value") and hud.has_node("EatBar"):
+			hud.get_node("EatBar").set_food_value(data["food_value"])
+
+		if data.has("threat_level") and hud.has_node("BeEatenBar"):
+			hud.get_node("BeEatenBar").value = data["threat_level"]
+
+
+
+
+
 
 func get_movement_speed() -> float:
 	# Check if the HUD and EatBar exist

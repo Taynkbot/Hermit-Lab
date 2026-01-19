@@ -46,6 +46,15 @@ func update_bars() -> void:
 		var range_end = range_start + 100
 		bar.value = clamp(universal_food_value - range_start, 0, 100)
 
+
+func get_food_value() -> float:
+	return universal_food_value
+
+func set_food_value(value: float) -> void:
+	universal_food_value = clamp(value, 0, 1000)
+	update_bars()
+
+
 func add_food(amount: float) -> void:
 	# Add food to the universal food value
 	universal_food_value += amount

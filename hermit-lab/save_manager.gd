@@ -9,23 +9,19 @@ var save_data = {
 
 # Save game data to a file
 func save_game():
-	# Get the player node from the group "player"
 	var player = get_tree().get_first_node_in_group("player")
-	if player:
-		# Save the player's global position as a Dictionary
-		save_data["persistent_data"]["player_position"] = {
-			"x": player.global_position.x,
-			"y": player.global_position.y
-		}
+	if player and player.has_method("get_save_data"):
+		save_data["persistent_data"]["player"] = player.get_save_data()
+	else:
+		print("Warning: Player not found or missing get_save_data()")
 
-	# Save the data to the file
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
-		file.store_string(JSON.stringify(save_data, "\t"))  # Pretty-print for debugging
+		file.store_string(JSON.stringify(save_data, "\t"))
 		file.close()
-		print("Game saved with player position:", player.global_position)
-	else:
-		print("Error: Unable to save game.")
+		print("Game saved")
+
+
 
 # Load game data from a file
 func load_game():
@@ -51,15 +47,11 @@ func load_game():
 
 		# Restore the player's position if it exists in the save data
 		var player = get_tree().get_first_node_in_group("player")
-		if player and "player_position" in save_data["persistent_data"]:
-			var position = save_data["persistent_data"]["player_position"]
-			if typeof(position) == TYPE_DICTIONARY and position.has("x") and position.has("y"):
-				player.global_position = Vector2(position["x"], position["y"])
-				print("Player position restored:", player.global_position)
-			else:
-				print("Error: Invalid player position data in save file.")
+		if player and save_data["persistent_data"].has("player"):
+			player.load_save_data(save_data["persistent_data"]["player"])
+			print("Player state restored")
 		else:
-			print("Warning: Player node not found or player position missing in save data.")
+			print("Warning: Player or player save data missing")
 	else:
 		print("Error parsing save file:", json.get_error_message())
 
