@@ -2,9 +2,8 @@ extends CharacterBody2D
 
 @export var speed: int = 200
 @export var sprint_speed_multiplier: float = 1.5
-@export var hud_path: NodePath  # Assign this to your HUD node in the Inspector
 
-@onready var hud = get_node(hud_path)  # Reference to the HUD node
+@onready var hud = get_node("../UI_Layer")  # Reference to the HUD node
 
 var inventory: Array = []
 var inventory_ui: Node = null
@@ -25,14 +24,6 @@ func _ready() -> void:
 		death_label = get_node("../UI_Layer/DeathLabel")
 		death_label.visible = false
 
-	# Check if the HUD node is assigned
-	if hud_path:
-		hud = get_node(hud_path)
-		if not hud:
-			print("Warning: HUD node not found via hud_path!")
-	else:
-		print("Warning: hud_path is not set!")
-
 	update_inventory_ui()
 
 
@@ -46,10 +37,11 @@ func get_save_data() -> Dictionary:
 	}
 
 	if hud:
-		if hud.has_node("EatBar"):
-			data["food_value"] = hud.get_node("EatBar").universal_food_value
+		if hud.has_node("eat_bar"):
+			data["food_value"] = hud.get_node("eat_bar").universal_food_value
 		if hud.has_node("BeEatenBar"):
-			data["threat_level"] = hud.get_node("BeEatenBar").value
+			data["threat_level"] = hud.get_node("BeEatenBar").be_eaten_level
+			print("Saving threat_level: ", data["threat_level"])
 
 	return data
 
@@ -64,21 +56,21 @@ func load_save_data(data: Dictionary) -> void:
 		update_inventory_ui()
 
 	if hud:
-		if data.has("food_value") and hud.has_node("EatBar"):
-			hud.get_node("EatBar").set_food_value(data["food_value"])
+		if data.has("food_value") and hud.has_node("eat_bar"):
+			hud.get_node("eat_bar").set_food_value(data["food_value"])
 
 		if data.has("threat_level") and hud.has_node("BeEatenBar"):
-			hud.get_node("BeEatenBar").value = data["threat_level"]
-
+			hud.get_node("BeEatenBar").be_eaten_level = data["threat_level"]
+			print("Loading threat_level: ", data["threat_level"])
 
 
 
 
 
 func get_movement_speed() -> float:
-	# Check if the HUD and EatBar exist
-	if hud and hud.has_node("EatBar"):
-		var eat_bar = hud.get_node("EatBar")
+	# Check if the HUD and eat_bar exist
+	if hud and hud.has_node("eat_bar"):
+		var eat_bar = hud.get_node("eat_bar")
 		var food_value = eat_bar.universal_food_value
 
 		# Double speed if food is 15 or less
@@ -117,9 +109,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	# Check for starvation: if EatBar is empty, die.
-	if hud and hud.has_node("EatBar"):
-		var eat_bar = hud.get_node("EatBar")
+	# Check for starvation: if eat_bar is empty, die.
+	if hud and hud.has_node("eat_bar"):
+		var eat_bar = hud.get_node("eat_bar")
 		if eat_bar.value <= 0:
 			die("You starved to death")
 	
@@ -161,7 +153,7 @@ func add_item(item_name: String, is_food: bool = false) -> void:
 	print("Picked up: " + item_name + " (food: " + str(is_food) + ")")
 	update_inventory_ui()
 
-func add_treasure(treasure: Node) -> void:
+func add_treasure(_treasure: Node) -> void:
 	# You could store treasure data, update an inventory, etc.
 	print("Treasure picked up!")
 	# For example, add the treasure's computed color or attributes to an inventory array.
@@ -176,20 +168,20 @@ func update_inventory_ui() -> void:
 			label.text = item["name"]
 			inventory_ui.add_child(label)
 
-# Consumes one food item and restores the EatBar by FOOD_RESTORE_AMOUNT.
+# Consumes one food item and restores the eat_bar by FOOD_RESTORE_AMOUNT.
 func eat_food() -> void:
 	print("Attempting to eat food. Inventory size: " + str(inventory.size()))
 	for i in range(inventory.size()):
 		if inventory[i]["is_food"]:
-			if hud and hud.has_node("EatBar"):
-				var eat_bar = hud.get_node("EatBar")  # Get the EatBar node
+			if hud and hud.has_node("eat_bar"):
+				var eat_bar = hud.get_node("eat_bar")  # Get the eat_bar node
 				if eat_bar.has_method("add_food"):
 					eat_bar.add_food(FOOD_RESTORE_AMOUNT)  # Add food to the universal food value
 					print("Ate: " + inventory[i]["name"] + ", Universal food value updated")
 				else:
-					print("Error: EatBar does not have an add_food method!")
+					print("Error: eat_bar does not have an add_food method!")
 			else:
-				print("Warning: HUD or EatBar not found!")
+				print("Warning: HUD or eat_bar not found!")
 			inventory.remove_at(i)  # Remove the food item from the inventory
 			update_inventory_ui()  # Update the inventory UI
 			return
@@ -212,6 +204,6 @@ func die(reason: String = "You dead Dingus") -> void:
 	get_tree().reload_current_scene()
 
 # Assuming you're using a CharacterBody2D
-func _process(delta):
+func _process(_delta):
 	if velocity.length() > 0:  # Only rotate if moving
 		rotation = velocity.angle()

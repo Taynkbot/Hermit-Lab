@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccc8t1jkwi4wf"
-path="res://.godot/imported/hermit-crab-01.png-65cf38d7ac2d0fcda0007a679de9beb4.ctex"
+uid="uid://dqordwqg284n3"
+path="res://.godot/imported/default_treasure_texture.png-1cd8094f9fc221a4b0e4b0dd5ba7f5bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/hermit-crab-01.png"
-dest_files=["res://.godot/imported/hermit-crab-01.png-65cf38d7ac2d0fcda0007a679de9beb4.ctex"]
+source_file="res://scenes/items/rocks/default_treasure_texture.png"
+dest_files=["res://.godot/imported/default_treasure_texture.png-1cd8094f9fc221a4b0e4b0dd5ba7f5bb.ctex"]
 
 [params]
 

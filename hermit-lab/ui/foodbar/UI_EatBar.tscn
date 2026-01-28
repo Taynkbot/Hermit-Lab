@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://caqvvevod3eua"]
 
-[ext_resource type="Script" uid="uid://cvyma5qdmotxf" path="res://ui_eat_bar.gd" id="1_18hca"]
+[ext_resource type="Script" uid="uid://cvyma5qdmotxf" path="res://ui/foodbar/ui_eat_bar.gd" id="1_18hca"]
 
-[node name="EatBar" type="ProgressBar"]
+[node name="eat_bar" type="ProgressBar"]
 self_modulate = Color(1, 0.239216, 0.392157, 0.658824)
 anchors_preset = 5
 anchor_left = 0.5
@@ -13,3 +13,5 @@ offset_bottom = 27.0
 grow_horizontal = 2
 value = 100.0
 script = ExtResource("1_18hca")
+eat_bar_path = null
+overfill_bar_paths = null

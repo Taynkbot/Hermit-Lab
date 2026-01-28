@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bv6mmxiridq6w"]
 
-[ext_resource type="Script" uid="uid://bdnbcqmbv4jrb" path="res://ui_eaten_bar.gd" id="1_lullf"]
+[ext_resource type="Script" uid="uid://bdnbcqmbv4jrb" path="res://ui/threatbar/ui_eaten_bar.gd" id="1_lullf"]
 
 [node name="BeEatenBar" type="ProgressBar"]
 self_modulate = Color(0.692892, 0.686027, 0, 0.772549)

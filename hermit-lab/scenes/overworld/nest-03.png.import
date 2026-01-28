@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cny2kuewxl678"
-path="res://.godot/imported/hermit-crab-01-small.png-af7d2365b419bcb07a296357a1f27400.ctex"
+uid="uid://coer7xun1kxfr"
+path="res://.godot/imported/nest-03.png-bb861cb342c804331509691557fd0f20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/hermit-crab-01-small.png"
-dest_files=["res://.godot/imported/hermit-crab-01-small.png-af7d2365b419bcb07a296357a1f27400.ctex"]
+source_file="res://scenes/overworld/nest-03.png"
+dest_files=["res://.godot/imported/nest-03.png-bb861cb342c804331509691557fd0f20.ctex"]
 
 [params]
 

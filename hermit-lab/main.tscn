@@ -1,23 +1,22 @@
 [gd_scene load_steps=12 format=3 uid="uid://3gga3lyf6t2r"]
 
-[ext_resource type="PackedScene" uid="uid://6jjkcgwk0xju" path="res://player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://jix40n1ryjqq" path="res://obstactle.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://c1f6boe3wf2x7" path="res://food_egg.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://cb02g52y1ykws" path="res://food_spawner.tscn" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://baqgur1c4o1a6" path="res://obstacle_spawner.gd" id="7_272bh"]
-[ext_resource type="Texture2D" uid="uid://o1u3dwt1rjxn" path="res://Resources/nest-01.png" id="8_4c57u"]
-[ext_resource type="PackedScene" uid="uid://cilcp4dr4lngv" path="res://Treasure.tscn" id="8_5vw27"]
-[ext_resource type="Texture2D" uid="uid://biowvbhqvvx37" path="res://Resources/nest-02.png" id="9_dg77c"]
-[ext_resource type="Texture2D" uid="uid://cyst1tkaovg5d" path="res://Resources/sandtile01.png" id="9_kek77"]
-[ext_resource type="Texture2D" uid="uid://coer7xun1kxfr" path="res://Resources/nest-03.png" id="10_ycdy4"]
-[ext_resource type="PackedScene" uid="uid://5563m3k7seik" path="res://ui_hud.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://6jjkcgwk0xju" path="res://entities/player/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://jix40n1ryjqq" path="res://scenes/overworld/obstacle.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c1f6boe3wf2x7" path="res://scenes/items/food/food_egg.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cb02g52y1ykws" path="res://scenes/items/food/food_spawner.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://baqgur1c4o1a6" path="res://scenes/overworld/obstacle_spawner.gd" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://o1u3dwt1rjxn" path="res://scenes/overworld/nest-01.png" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://cilcp4dr4lngv" path="res://scenes/items/rocks/Treasure.tscn" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://biowvbhqvvx37" path="res://scenes/overworld/nest-02.png" id="9_dg77c"]
+[ext_resource type="Texture2D" uid="uid://cyst1tkaovg5d" path="res://scenes/overworld/sandtile01.png" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://coer7xun1kxfr" path="res://scenes/overworld/nest-03.png" id="10_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://5563m3k7seik" path="res://ui/ui_hud.tscn" id="11_efxa6"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(3, 3)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_ig7tw")]
 position = Vector2(555, 311)
-hud_path = NodePath("../UI_Layer")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 7)

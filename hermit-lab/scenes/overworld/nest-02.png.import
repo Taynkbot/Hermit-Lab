@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2e37f71lm1ne"
-path="res://.godot/imported/egg-02.png-5c6859e3ac1e4bee78f38b7c31075f75.ctex"
+uid="uid://biowvbhqvvx37"
+path="res://.godot/imported/nest-02.png-7dc3981af93239f3116d789f5dac19e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/egg-02.png"
-dest_files=["res://.godot/imported/egg-02.png-5c6859e3ac1e4bee78f38b7c31075f75.ctex"]
+source_file="res://scenes/overworld/nest-02.png"
+dest_files=["res://.godot/imported/nest-02.png-7dc3981af93239f3116d789f5dac19e1.ctex"]
 
 [params]
 

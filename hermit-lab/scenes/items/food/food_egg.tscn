@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://c1f6boe3wf2x7"]
 
-[ext_resource type="Script" uid="uid://ba4o8i7ndlcsl" path="res://food_egg.gd" id="1_tnite"]
-[ext_resource type="Texture2D" uid="uid://bk3anv03qjir7" path="res://Resources/egg-01.png" id="2_iv25w"]
-[ext_resource type="Texture2D" uid="uid://c2e37f71lm1ne" path="res://Resources/egg-02.png" id="3_jeh8f"]
-[ext_resource type="Texture2D" uid="uid://ds5qgj62f8y1t" path="res://Resources/egg-03.png" id="4_xas5f"]
-[ext_resource type="Texture2D" uid="uid://c2lvqm4sdo7nt" path="res://Resources/egg-04.png" id="5_vwfbg"]
-[ext_resource type="Texture2D" uid="uid://bfenxshjcwsts" path="res://Resources/egg-05.png" id="6_wrl7i"]
+[ext_resource type="Script" uid="uid://ba4o8i7ndlcsl" path="res://scenes/items/food/food_egg.gd" id="1_tnite"]
+[ext_resource type="Texture2D" uid="uid://bk3anv03qjir7" path="res://scenes/items/food/egg-01.png" id="2_iv25w"]
+[ext_resource type="Texture2D" uid="uid://c2e37f71lm1ne" path="res://scenes/items/food/egg-02.png" id="3_jeh8f"]
+[ext_resource type="Texture2D" uid="uid://ds5qgj62f8y1t" path="res://scenes/items/food/egg-03.png" id="4_xas5f"]
+[ext_resource type="Texture2D" uid="uid://c2lvqm4sdo7nt" path="res://scenes/items/food/egg-04.png" id="5_vwfbg"]
+[ext_resource type="Texture2D" uid="uid://bfenxshjcwsts" path="res://scenes/items/food/egg-05.png" id="6_wrl7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpy52"]
 size = Vector2(28, 37)

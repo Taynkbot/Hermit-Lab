@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://5563m3k7seik"]
+[gd_scene load_steps=9 format=3 uid="uid://5563m3k7seik"]
 
-[ext_resource type="Script" uid="uid://dfjme6376uhqq" path="res://ui_hud.gd" id="1_jkgtr"]
-[ext_resource type="PackedScene" uid="uid://caqvvevod3eua" path="res://UI_EatBar.tscn" id="1_svere"]
-[ext_resource type="PackedScene" uid="uid://bv6mmxiridq6w" path="res://UI_EatenBar.tscn" id="2_jkgtr"]
+[ext_resource type="Script" uid="uid://dfjme6376uhqq" path="res://ui/ui_hud.gd" id="1_jkgtr"]
+[ext_resource type="PackedScene" uid="uid://caqvvevod3eua" path="res://ui/foodbar/UI_EatBar.tscn" id="1_svere"]
+[ext_resource type="PackedScene" uid="uid://bv6mmxiridq6w" path="res://ui/threatbar/UI_EatenBar.tscn" id="2_jkgtr"]
+[ext_resource type="PackedScene" uid="uid://c2y3e31geum51" path="res://ui/inventory/UI_Inventory.tscn" id="4_3jkaj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkgtr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -26,22 +27,23 @@ corner_radius_bottom_left = 5
 
 [node name="UI_Layer" type="CanvasLayer"]
 script = ExtResource("1_jkgtr")
-eat_bar_path = NodePath("EatBar")
-overfill_bar_path = NodePath("EatBar/OverfillBar")
+eat_bar_path = NodePath("eat_bar")
+overfill_bar_path = NodePath("eat_bar/OverfillBar")
 be_eaten_bar_path = NodePath("BeEatenBar")
+ui_inventory = NodePath("inventory_ui")
 
-[node name="EatBar" parent="." instance=ExtResource("1_svere")]
+[node name="eat_bar" parent="." instance=ExtResource("1_svere")]
 eat_bar_path = NodePath(".")
 overfill_bar_paths = [null, null, null, null, null, null, null, null, null]
 
-[node name="OverfillBar" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar" type="ProgressBar" parent="eat_bar"]
 modulate = Color(0.635294, 0.721569, 1, 0.329412)
 layout_mode = 0
 offset_right = 575.0
 offset_bottom = 27.0
 show_percentage = false
 
-[node name="OverfillBar2" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar2" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -50,7 +52,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar3" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar3" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -59,7 +61,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar4" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar4" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -68,7 +70,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar5" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar5" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -77,7 +79,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar6" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar6" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -86,7 +88,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar7" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar7" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -95,7 +97,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar8" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar8" type="ProgressBar" parent="eat_bar"]
 self_modulate = Color(0.62868, 0.623696, 0.596742, 1)
 layout_mode = 0
 offset_right = 575.0
@@ -104,7 +106,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jkgtr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3jkaj")
 show_percentage = false
 
-[node name="OverfillBar9" type="ProgressBar" parent="EatBar"]
+[node name="OverfillBar9" type="ProgressBar" parent="eat_bar"]
 layout_mode = 0
 offset_right = 575.0
 offset_bottom = 27.0
@@ -126,3 +128,7 @@ text = "You Dead Bitch!"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="inventory_ui" parent="." instance=ExtResource("4_3jkaj")]
+offset = Vector2(2.915, 34.95)
+transform = Transform2D(1, 0, 0, 1, 2.915, 34.95)

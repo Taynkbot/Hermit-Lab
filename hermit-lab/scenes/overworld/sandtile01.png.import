@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biowvbhqvvx37"
-path="res://.godot/imported/nest-02.png-8914a0d37b2666c17aba56c6b84daa41.ctex"
+uid="uid://cyst1tkaovg5d"
+path="res://.godot/imported/sandtile01.png-b729484d33ec56beee7f93c457241061.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/nest-02.png"
-dest_files=["res://.godot/imported/nest-02.png-8914a0d37b2666c17aba56c6b84daa41.ctex"]
+source_file="res://scenes/overworld/sandtile01.png"
+dest_files=["res://.godot/imported/sandtile01.png-b729484d33ec56beee7f93c457241061.ctex"]
 
 [params]
 

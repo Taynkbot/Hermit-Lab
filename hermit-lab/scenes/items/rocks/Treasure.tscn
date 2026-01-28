@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cilcp4dr4lngv"]
 
-[ext_resource type="Script" uid="uid://bmq116k5bobur" path="res://treasure.gd" id="1_r4olm"]
-[ext_resource type="Texture2D" uid="uid://dag1rwsvuwjju" path="res://Resources/default_treasure_texture-small.png" id="2_mgk8x"]
+[ext_resource type="Script" uid="uid://bmq116k5bobur" path="res://scenes/items/rocks/treasure.gd" id="1_r4olm"]
+[ext_resource type="Texture2D" uid="uid://dag1rwsvuwjju" path="res://scenes/items/rocks/default_treasure_texture-small.png" id="2_mgk8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4k7c"]
 size = Vector2(100, 100)

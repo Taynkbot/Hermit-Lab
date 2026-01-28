@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqordwqg284n3"
-path="res://.godot/imported/default_treasure_texture.png-5d1144afba6917ba6d18a6b9c7477799.ctex"
+uid="uid://o1u3dwt1rjxn"
+path="res://.godot/imported/nest-01.png-e0473cc9f50bf5c396ba471aea82cf30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/default_treasure_texture.png"
-dest_files=["res://.godot/imported/default_treasure_texture.png-5d1144afba6917ba6d18a6b9c7477799.ctex"]
+source_file="res://scenes/overworld/nest-01.png"
+dest_files=["res://.godot/imported/nest-01.png-e0473cc9f50bf5c396ba471aea82cf30.ctex"]
 
 [params]
 

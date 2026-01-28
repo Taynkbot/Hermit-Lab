@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0dv0nam6mdkp"
-path="res://.godot/imported/hermit-crab-01.jpg-0bc4e9e73ac3d45324bb7de7c5e6c40a.ctex"
+uid="uid://c2lvqm4sdo7nt"
+path="res://.godot/imported/egg-04.png-e5234e1f1c444a8e5c8ede5dc9b1c028.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/hermit-crab-01.jpg"
-dest_files=["res://.godot/imported/hermit-crab-01.jpg-0bc4e9e73ac3d45324bb7de7c5e6c40a.ctex"]
+source_file="res://scenes/items/food/egg-04.png"
+dest_files=["res://.godot/imported/egg-04.png-e5234e1f1c444a8e5c8ede5dc9b1c028.ctex"]
 
 [params]
 

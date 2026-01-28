@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o1u3dwt1rjxn"
-path="res://.godot/imported/nest-01.png-80ea3d54348ffb150f3c323b5dc7dd64.ctex"
+uid="uid://dag1rwsvuwjju"
+path="res://.godot/imported/default_treasure_texture-small.png-18e49dd02243c35579ab46bffaab7731.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/nest-01.png"
-dest_files=["res://.godot/imported/nest-01.png-80ea3d54348ffb150f3c323b5dc7dd64.ctex"]
+source_file="res://scenes/items/rocks/default_treasure_texture-small.png"
+dest_files=["res://.godot/imported/default_treasure_texture-small.png-18e49dd02243c35579ab46bffaab7731.ctex"]
 
 [params]
 
