@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://upwsexqm3p7j"]
+
+[ext_resource type="Texture2D" uid="uid://cjhy5eqnb8fbw" path="res://entities/enemies/enemy01.png" id="1_tb5o5"]
+[ext_resource type="Script" uid="uid://htqi2w8tpms1" path="res://entities/enemies/enemy_01.gd" id="1_y7a4f"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5q10f"]
+points = PackedVector2Array(22, -14, 30, 14, -30, 14, -22, -14, 0, -18)
+
+[node name="Enemy01" type="CharacterBody2D"]
+script = ExtResource("1_y7a4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, 30)
+rotation = 1.5708
+texture = ExtResource("1_tb5o5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(14, 30)
+rotation = 1.5708
+shape = SubResource("ConvexPolygonShape2D_5q10f")

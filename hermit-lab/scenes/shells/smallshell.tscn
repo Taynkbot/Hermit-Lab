@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://jenyd17pnp42"]
+
+[ext_resource type="Texture2D" uid="uid://43mlehs32bfb" path="res://scenes/shells/shell.png" id="1_btx5x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpuqs"]
+size = Vector2(100, 100)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_bpuqs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(50, 50)
+texture = ExtResource("1_btx5x")
+
+[node name="Prompt" type="Label" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 126.0
+offset_bottom = -23.0
+text = "A HOME!
+Press Tab to climb in!"
+horizontal_alignment = 1

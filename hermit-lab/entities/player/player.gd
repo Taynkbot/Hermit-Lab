@@ -4,11 +4,12 @@ extends CharacterBody2D
 @export var sprint_speed_multiplier: float = 1.5
 
 @onready var hud = get_node("../UI_Layer")  # Reference to the HUD node
+@onready var inventory_ui = get_node("../UI_Layer/ui_inventory")  # Reference to the inventory UI container
 
 var inventory: Array = []
-var inventory_ui: Node = null
 var death_label: Label = null
 var is_dead: bool = false
+var can_eat: bool = true
 var can_pickup: bool = true
 var base_speed = 200  # Adjust this to your normal movement speed
 var overfill_penalty = 0.05  # Speed penalty per overfill level
@@ -18,8 +19,6 @@ const FOOD_RESTORE_AMOUNT: int = 25
 
 func _ready() -> void:
 	# Find UI nodes (adjust paths to match your scene hierarchy)
-	if has_node("../UI_Layer/Panel/VBoxContainer"):
-		inventory_ui = get_node("../UI_Layer/Panel/VBoxContainer")
 	if has_node("../UI_Layer/DeathLabel"):
 		death_label = get_node("../UI_Layer/DeathLabel")
 		death_label.visible = false
@@ -115,10 +114,6 @@ func _physics_process(delta: float) -> void:
 		if eat_bar.value <= 0:
 			die("You starved to death")
 	
-	# Press F to consume food
-	if Input.is_action_just_pressed("pickup"):
-		eat_food()
-	
 	# Update BeEatenBar: increase while moving
 	if is_moving and hud and hud.has_node("BeEatenBar"):
 		var be_eaten_bar = hud.get_node("BeEatenBar")
@@ -143,23 +138,32 @@ func _input(event: InputEvent) -> void:
 			var be_eaten_bar = hud.get_node("BeEatenBar")
 			be_eaten_bar.is_hiding = false
 	# Check for pickup event
-	if event.is_action_released("pickup"):
-		can_pickup = true
+	if event.is_action_released("eat"):
+		can_eat = true
 
-# Adds an item to the inventory.
-# When adding food, call add_item("Morsel of Food", true)
-func add_item(item_name: String, is_food: bool = false) -> void:
-	inventory.append({"name": item_name, "is_food": is_food})
-	print("Picked up: " + item_name + " (food: " + str(is_food) + ")")
+
+# Consumes one food item and restores the eat_bar by amount.
+func eat_food(amount: int = FOOD_RESTORE_AMOUNT) -> void:
+	print("Attempting to eat food. Amount: ", amount)
+	if hud and hud.has_node("eat_bar"):
+		var eat_bar = hud.get_node("eat_bar")  # Get the eat_bar node
+		if eat_bar.has_method("add_food"):
+			eat_bar.add_food(amount)  # Add food to the universal food value
+			print("Ate food! Added: ", amount)
+		else:
+			print("Error: eat_bar does not have an add_food method!")
+	else:
+		print("No food to eat!")
+
+func pickup_item(item_data: Dictionary) -> void:
+	inventory.append(item_data)
 	update_inventory_ui()
-
-func add_treasure(_treasure: Node) -> void:
-	# You could store treasure data, update an inventory, etc.
-	print("Treasure picked up!")
 	# For example, add the treasure's computed color or attributes to an inventory array.
 
 # Updates the inventory UI with current items.
 func update_inventory_ui() -> void:
+	print("inventory_ui:", inventory_ui)
+	print("inventory size:", inventory.size())
 	if inventory_ui:
 		for child in inventory_ui.get_children():
 			child.queue_free()
@@ -167,25 +171,6 @@ func update_inventory_ui() -> void:
 			var label = Label.new()
 			label.text = item["name"]
 			inventory_ui.add_child(label)
-
-# Consumes one food item and restores the eat_bar by FOOD_RESTORE_AMOUNT.
-func eat_food() -> void:
-	print("Attempting to eat food. Inventory size: " + str(inventory.size()))
-	for i in range(inventory.size()):
-		if inventory[i]["is_food"]:
-			if hud and hud.has_node("eat_bar"):
-				var eat_bar = hud.get_node("eat_bar")  # Get the eat_bar node
-				if eat_bar.has_method("add_food"):
-					eat_bar.add_food(FOOD_RESTORE_AMOUNT)  # Add food to the universal food value
-					print("Ate: " + inventory[i]["name"] + ", Universal food value updated")
-				else:
-					print("Error: eat_bar does not have an add_food method!")
-			else:
-				print("Warning: HUD or eat_bar not found!")
-			inventory.remove_at(i)  # Remove the food item from the inventory
-			update_inventory_ui()  # Update the inventory UI
-			return
-	print("No food to eat!")
 
 # Callback for BeEatenBar signal.
 func _on_be_eaten() -> void:

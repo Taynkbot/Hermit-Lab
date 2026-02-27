@@ -6,6 +6,7 @@ const NUM_ATTRIBUTES = 8
 # Array to hold the 8 attribute values.
 var attributes: Array = []
 
+
 # Reference to the Sprite2D node.
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -15,6 +16,7 @@ var hues: Array = [0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0]
 
 @export var texture: Texture
 var player_in_area: bool = false
+var final_color: Color = Color(1, 1, 1)  # Default to white if no attributes
 
 func _ready() -> void:
 	# Generate random attributes.
@@ -43,7 +45,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Only allow pickup if the player is in range and presses the pickup action.
 	if player_in_area and Input.is_action_just_pressed("pickup"):
-		pickup()
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			pickup(player)
+		else:
+			print("Warning: Player node not found for pickup!")
+
 
 func _on_body_entered(body: Node) -> void:
 	# Check if the body is the player (or in the "player" group).
@@ -59,20 +66,17 @@ func _on_body_exited(body: Node) -> void:
 		if has_node("Prompt"):
 			$Prompt.visible = false
 
-func pickup() -> void:
-	# Iterate over overlapping bodies to find the player.
-	var bodies = get_overlapping_bodies()
-	var player_node = null
-	for b in bodies:
-		# Ensure b is an object and in the "player" group.
-		if b is Node and b.is_in_group("player"):
-			player_node = b
-			break
-	if player_node and player_node.has_method("add_treasure"):
-		player_node.add_treasure(self)
-	else:
-		print("Player not found or add_treasure() missing!")
+func pickup(player: Node) -> void:
+	var treasure_data := {
+		"type": "treasure",
+		"name": "Treasure",
+		"attributes": attributes,  # your 8-value array
+		"color": final_color    # optional if you stored it
+	}
+
+	player.pickup_item(treasure_data)
 	queue_free()
+
 
 # Generate random attributes (each between 0 and 1).
 func _generate_attributes() -> void:

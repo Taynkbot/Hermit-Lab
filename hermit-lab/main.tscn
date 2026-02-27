@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://3gga3lyf6t2r"]
+[gd_scene load_steps=15 format=3 uid="uid://3gga3lyf6t2r"]
 
 [ext_resource type="PackedScene" uid="uid://6jjkcgwk0xju" path="res://entities/player/player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://jix40n1ryjqq" path="res://scenes/overworld/obstacle.tscn" id="2_0xm2m"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://cyst1tkaovg5d" path="res://scenes/overworld/sandtile01.png" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://coer7xun1kxfr" path="res://scenes/overworld/nest-03.png" id="10_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://5563m3k7seik" path="res://ui/ui_hud.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://jenyd17pnp42" path="res://scenes/shells/smallshell.tscn" id="12_dg77c"]
+[ext_resource type="Script" uid="uid://d1cj2pwqaf20u" path="res://scenes/shells/smallshell.gd" id="13_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://upwsexqm3p7j" path="res://entities/enemies/Enemy01.tscn" id="14_w48qg"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(3, 3)
@@ -72,3 +75,10 @@ stretch_mode = 1
 
 [node name="UI_Layer" parent="." instance=ExtResource("11_efxa6")]
 player_path = NodePath("../Player")
+
+[node name="smallshell" parent="." instance=ExtResource("12_dg77c")]
+position = Vector2(542, 472)
+script = ExtResource("13_ycdy4")
+
+[node name="Enemy01" parent="." instance=ExtResource("14_w48qg")]
+position = Vector2(370, 429)

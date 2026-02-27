@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dfjme6376uhqq" path="res://ui/ui_hud.gd" id="1_jkgtr"]
 [ext_resource type="PackedScene" uid="uid://caqvvevod3eua" path="res://ui/foodbar/UI_EatBar.tscn" id="1_svere"]
 [ext_resource type="PackedScene" uid="uid://bv6mmxiridq6w" path="res://ui/threatbar/UI_EatenBar.tscn" id="2_jkgtr"]
-[ext_resource type="PackedScene" uid="uid://c2y3e31geum51" path="res://ui/inventory/UI_Inventory.tscn" id="4_3jkaj"]
+[ext_resource type="PackedScene" uid="uid://c2y3e31geum51" path="res://ui/inventory/ui_inventory.tscn" id="4_3jkaj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkgtr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -30,7 +30,7 @@ script = ExtResource("1_jkgtr")
 eat_bar_path = NodePath("eat_bar")
 overfill_bar_path = NodePath("eat_bar/OverfillBar")
 be_eaten_bar_path = NodePath("BeEatenBar")
-ui_inventory = NodePath("inventory_ui")
+ui_inventory = NodePath("ui_inventory")
 
 [node name="eat_bar" parent="." instance=ExtResource("1_svere")]
 eat_bar_path = NodePath(".")
@@ -129,6 +129,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="inventory_ui" parent="." instance=ExtResource("4_3jkaj")]
+[node name="ui_inventory" parent="." instance=ExtResource("4_3jkaj")]
 offset = Vector2(2.915, 34.95)
 transform = Transform2D(1, 0, 0, 1, 2.915, 34.95)
